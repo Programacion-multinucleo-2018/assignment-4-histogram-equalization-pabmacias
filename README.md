@@ -24,3 +24,15 @@ Rubric:
 5. For the GPU version, used shared memory where necessary.
 6. Both images are displayed at the end.
 7. Calculation times and speedup obtained are incuded in the Readme.
+
+Results:
+
+| Image         | GPU           | CPU           | Speedup       |
+| ------------- |:-------------:|:-------------:| -------------:|
+| dog1          | 0.027981 ms   | 220.384827 ms | 7876.23126407 |
+| dog2          | 0.018761 ms   | 220.370773 ms | 11746.2167795 |
+| dog3          | 0.018036 ms   | 232.162842 ms | 12872.1912841 |
+| scenery       | 0.017705 ms   |   7.069092 ms | 399.270940412 |
+| woman         | 0.018327 ms   | 178.494812 ms | 9739.44519016 |
+| woman2        | 0.020057 ms   | 172.892899 ms | 8620.07772847 |
+| woman3        | 0.018146 ms   | 177.573990 ms | 9785.84756971 |
