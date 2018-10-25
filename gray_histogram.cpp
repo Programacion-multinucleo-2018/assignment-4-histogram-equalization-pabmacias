@@ -4,6 +4,7 @@
 #include <opencv2/core/core.hpp>
 #include <stdio.h>
 #include <iostream>
+#include <chrono>
 
 using namespace std;
 
@@ -38,7 +39,7 @@ int main(int argc, char *argv[]) {
   string imagePath;
 
 	if(argc < 2)
-		imagePath = "Images/dog1.jpeg";
+		imagePath = "Images/woman3.jpg";
   	else
   		imagePath = argv[1];
 
@@ -60,7 +61,12 @@ int main(int argc, char *argv[]) {
 	cv::cvtColor(input, output, cv::COLOR_BGR2GRAY);
 
   cv::Mat output_n(input.rows, input.cols, CV_8UC1);
+
+  auto start_cpu =  chrono::high_resolution_clock::now();
   histogram(output, output_n);
+  auto end_cpu =  chrono::high_resolution_clock::now();
+	chrono::duration<float, std::milli> duration_ms = end_cpu - start_cpu;
+	printf("elapsed %f ms\n", duration_ms.count());
 
   //Allow the windows to resize
   namedWindow("Input", cv::WINDOW_NORMAL);

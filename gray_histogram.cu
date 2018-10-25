@@ -91,9 +91,13 @@ void normalize(const cv::Mat& input, cv::Mat& output) {
 	// printf("bgr_to_gray_kernel<<<(%d, %d) , (%d, %d)>>>\n", grid.x, grid.y, block.x, block.y);
 
 	// Launch the color conversion kernel
+  auto start_cpu =  chrono::high_resolution_clock::now();
   histogram<<<grid,block>>>(d_input, d_output, input.cols, input.rows, static_cast<int>(input.step), h, h_s);
   normalize_histogram<<<grid,block>>>(d_input, d_output, input.cols, input.rows, static_cast<int>(input.step), h, h_s);
   normalize_image<<<grid,block>>>(d_input, d_output, input.cols, input.rows, static_cast<int>(input.step), h, h_s);
+  auto end_cpu =  chrono::high_resolution_clock::now();
+	chrono::duration<float, std::milli> duration_ms = end_cpu - start_cpu;
+	printf("elapsed %f ms\n", duration_ms.count());
 
 	// Synchronize to check for any kernel launch errors
 	SAFE_CALL(cudaDeviceSynchronize(), "Kernel Launch Failed");
@@ -110,7 +114,7 @@ int main(int argc, char *argv[]) {
   string imagePath;
 
 	if(argc < 2)
-		imagePath = "Images/dog1.jpeg";
+		imagePath = "Images/woman3.jpg";
   	else
   		imagePath = argv[1];
 
