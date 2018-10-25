@@ -24,7 +24,7 @@ void histogram(const cv::Mat& input, cv::Mat& output) {
     for (int j=0; j<=i; j++) {
       h_s[i] += h[j];
     }
-    h_s[i] = h_s[i]*(normalize);
+    h_s[i] = h_s[i]*normalize;
   }
 
   for (int i=0; i<output.rows; i++) {
